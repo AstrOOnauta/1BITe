@@ -1,7 +1,7 @@
 {
-  "name": "next-13-boilerplate",
+  "name": "1bite",
   "author": "AstrOOnauta (https://github.com/AstrOOnauta)",
-  "description": "Boilerplate NextJS 13 + Typescript + Chakra UI + Prettier + ESLint + Pre-commit (Husky + Lint-staged) + Cypress (e2e + component)",
+  "description": "Um sistema de cardápio digital para o seu negócio.",
   "version": "0.0.1",
   "private": true,
   "scripts": {

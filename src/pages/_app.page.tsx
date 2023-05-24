@@ -7,7 +7,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <GlobalContext>
       <Head>
-        <title>Boilerplate NextJS 13</title>
+        <title>1BITe</title>
         <meta charSet="UTF-8" key="charset" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" key="http-equiv" />
         <meta
@@ -23,18 +23,14 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         />
         <meta
           name="description"
-          content="Boilerplate NextJS 13 + Typescript + Chakra UI + Prettier + ESLint + Pre-commit (Husky + Lint-staged) + Cypress (e2e + component)"
+          content="Um sistema de cardápio digital para o seu negócio."
           key="description"
         />
-        <meta
-          property="og:url"
-          content="https://github.com/AstrOOnauta/next-13-boilerplate"
-          key="url"
-        />
-        <meta property="og:title" content="Boilerplate Next 13" key="title" />
-        <meta
+        <meta property="og:url" content="https://1bite.vercel.app/" key="url" />
+        <meta property="og:title" content="1BITe" key="title" />
+        {/* <meta
           property="og:image"
-          content="/images/dev-libraries.jpg"
+          content="/images/og-image.jpg"
           key="image"
         />
         <meta property="og:image:type" content="image/jpeg" key="image:type" />
@@ -42,9 +38,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <meta property="og:image:height" content="630" key="image:height" />
         <meta
           property="og:image:alt"
-          content="Boilerplate NextJS 13 + Typescript + Chakra UI + Prettier + ESLint + Pre-commit (Husky + Lint-staged) + Cypress (e2e + component)"
+          content="Um sistema de cardápio digital para o seu negócio."
           key="image:alt"
-        />
+        /> */}
         <link
           rel="apple-touch-icon"
           type="image/png"
