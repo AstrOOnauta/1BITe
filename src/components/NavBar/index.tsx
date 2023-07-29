@@ -1,11 +1,14 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable sonarjs/cognitive-complexity */
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/no-unused-prop-types */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
+  Avatar,
   Button,
   ButtonProps,
   Flex,
@@ -23,6 +26,7 @@ import {
 import { MdMenu } from "react-icons/md";
 
 import { hexToRgba } from "~/shared/utils/hexToRgba";
+import ProfileMenu from "../ProfileMenu";
 
 interface IButton extends ButtonProps {
   title: string;
@@ -45,19 +49,38 @@ const MENU_DATA = [
     title: "Cadastre seu Restaurante",
     path: "/planos",
   },
+];
+
+const PUBLIC_MENU_DATA = [
   {
-    id: 3,
+    id: 0,
     title: "Criar Conta",
     path: "/cadastro",
   },
   {
-    id: 4,
+    id: 1,
     title: "Entrar",
     path: "/entrar",
   },
 ];
 
+const PRIVATE_MENU_DATA = [
+  {
+    id: 0,
+    title: "Perfil",
+    path: "/profile",
+  },
+  {
+    id: 1,
+    title: "Meus Restaurantes",
+    path: "/meus-restaurantes",
+  },
+];
+
 export default function NavBar() {
+  const [user] = useState(false);
+
+  const theme = useTheme();
   const router = useRouter();
 
   const isMobileVersion = useBreakpointValue({
@@ -89,8 +112,6 @@ export default function NavBar() {
   }
 
   function SecondaryButton({ title, isActive }: IButton) {
-    const theme = useTheme();
-
     return (
       <Button
         variant="outline"
@@ -139,6 +160,84 @@ export default function NavBar() {
     );
   }
 
+  function GeneralMenuList() {
+    return (
+      <>
+        {MENU_DATA.map((item) => {
+          return (
+            <MenuItem
+              key={item.id}
+              as={Link}
+              href={item.path}
+              bg={router.pathname === item.path ? "blue.900" : "transparent"}
+            >
+              <Text
+                color={router.pathname === item.path ? "green.50" : "blue.900"}
+              >
+                {item.title}
+              </Text>
+            </MenuItem>
+          );
+        })}
+      </>
+    );
+  }
+
+  function PublicMenuList() {
+    return (
+      <>
+        {PUBLIC_MENU_DATA.map((item) => {
+          return (
+            <MenuItem
+              key={item.id}
+              as={Link}
+              href={item.path}
+              bg={router.pathname === item.path ? "blue.900" : "transparent"}
+            >
+              <Text
+                color={router.pathname === item.path ? "green.50" : "blue.900"}
+              >
+                {item.title}
+              </Text>
+            </MenuItem>
+          );
+        })}
+      </>
+    );
+  }
+
+  function PrivateMenuList() {
+    return (
+      <>
+        <MenuItem bg="transparent" isDisabled>
+          <Flex w="100%" justifyContent="space-between">
+            <Text>Usuário</Text>
+            <Avatar size="xs" />
+          </Flex>
+        </MenuItem>
+        {PRIVATE_MENU_DATA.map((item) => {
+          return (
+            <MenuItem
+              key={item.id}
+              as={Link}
+              href={item.path}
+              bg={router.pathname === item.path ? "blue.900" : "transparent"}
+            >
+              <Text
+                color={router.pathname === item.path ? "green.50" : "blue.900"}
+              >
+                {item.title}
+              </Text>
+            </MenuItem>
+          );
+        })}
+        <MenuItem as="button" onClick={() => null} bg="transparent">
+          <Text color="blue.900">Sair</Text>
+        </MenuItem>
+      </>
+    );
+  }
+
   function MobileMenu({ version }: { version: "mobile" | "tablet" }) {
     return (
       <Menu>
@@ -155,31 +254,20 @@ export default function NavBar() {
             backgroundColor: "blue.900",
           }}
         />
-        <MenuList>
-          {MENU_DATA.map((item) => {
-            if (version === "tablet") {
-              return item.id > 2 ? (
-                <MenuItem key={item.id} as="a" href={item.path}>
-                  <Text>{item.title}</Text>
-                </MenuItem>
-              ) : null;
-            }
-
-            return (
-              <Flex key={item.id}>
-                <MenuItem
-                  as="a"
-                  href={item.path}
-                  bg={
-                    router.pathname === item.path ? "blue.900" : "transparent"
-                  }
-                >
-                  <Text>{item.title}</Text>
-                </MenuItem>
-                {item.id === 2 ? <MenuDivider /> : null}
-              </Flex>
-            );
-          })}
+        <MenuList bg="green.50" shadow="xl">
+          {version === "mobile" ? (
+            <>
+              <GeneralMenuList />
+              <MenuDivider />
+              {user ? <PrivateMenuList /> : <PublicMenuList />}
+            </>
+          ) : version === "tablet" ? (
+            user ? (
+              <PrivateMenuList />
+            ) : (
+              <PublicMenuList />
+            )
+          ) : null}
         </MenuList>
       </Menu>
     );
@@ -194,7 +282,7 @@ export default function NavBar() {
       maxW="1400px"
     >
       <Flex alignItems="center" gap={5}>
-        <Link href="#">
+        <Link href="/">
           <Image src="icons/logo-1bite.svg" w={16} h={16} />
         </Link>
         {isMobileVersion ? null : (
@@ -219,6 +307,8 @@ export default function NavBar() {
       </Flex>
       {isTabletVersion ? (
         <MobileMenu version={isMobileVersion ? "mobile" : "tablet"} />
+      ) : user ? (
+        <ProfileMenu />
       ) : (
         <Flex gap={5}>
           <Link href="/cadastro">
