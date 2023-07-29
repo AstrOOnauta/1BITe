@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 
@@ -88,7 +89,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           key="icon192"
         />
       </Head>
-      <Component {...pageProps} />
+      <Box bg="green.50">
+        <Component {...pageProps} />
+      </Box>
     </GlobalContext>
   );
 };
