@@ -90,7 +90,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           key="icon192"
         />
       </Head>
-      <Flex bg="green.50" flexDir="column" minH="100vh" w="100%" p={6}>
+      <Flex bg="gray.50" flexDir="column" minH="100vh" w="100%" p={6}>
         <NavBar />
         <Component {...pageProps} />
       </Flex>

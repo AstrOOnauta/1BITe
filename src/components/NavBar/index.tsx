@@ -280,6 +280,7 @@ export default function NavBar() {
       alignSelf="center"
       w="100%"
       maxW="1400px"
+      zIndex={2}
     >
       <Flex alignItems="center" gap={5}>
         <Link href="/">
