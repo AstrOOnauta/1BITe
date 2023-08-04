@@ -9,7 +9,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import {
   Avatar,
-  Button,
   ButtonProps,
   Flex,
   IconButton,
@@ -27,6 +26,7 @@ import { MdMenu } from "react-icons/md";
 
 import { hexToRgba } from "~/shared/utils/hexToRgba";
 import ProfileMenu from "../ProfileMenu";
+import Button from "../Form/Button";
 
 interface IButton extends ButtonProps {
   title: string;
@@ -92,73 +92,6 @@ export default function NavBar() {
     md: true,
     lg: false,
   });
-
-  function PrimaryButton({ title, isActive }: IButton) {
-    return (
-      <Button
-        variant="solid"
-        backgroundColor={isActive ? "blue.700" : "blue.900"}
-        color="green.50"
-        _hover={{
-          backgroundColor: "blue.700",
-        }}
-        _active={{
-          backgroundColor: "blue.900",
-        }}
-      >
-        {title}
-      </Button>
-    );
-  }
-
-  function SecondaryButton({ title, isActive }: IButton) {
-    return (
-      <Button
-        variant="outline"
-        color={isActive ? "green.50" : "blue.900"}
-        borderColor="blue.900"
-        bg={isActive ? "blue.700" : "transparent"}
-        _hover={{
-          backgroundColor: `${hexToRgba(theme.colors.blue[900], "0.1")}`,
-          color: "blue.900",
-        }}
-        _active={{
-          color: "blue.500",
-          borderColor: "blue.500",
-        }}
-      >
-        {title}
-      </Button>
-    );
-  }
-
-  function LinkButton({ title, isActive }: IButton) {
-    return (
-      <Button
-        p={2}
-        h={8}
-        borderRadius={0}
-        borderBottomWidth={2}
-        borderColor={isActive ? "blue.900" : "transparent"}
-        bg="none"
-        color="blue.900"
-        _hover={{
-          color: "blue.900",
-          borderRadius: 0,
-          borderBottomWidth: 2,
-          borderColor: "blue.900",
-        }}
-        _active={{
-          color: "blue.600",
-          borderRadius: 0,
-          borderBottomWidth: 2,
-          borderColor: "blue.600",
-        }}
-      >
-        {title}
-      </Button>
-    );
-  }
 
   function GeneralMenuList() {
     return (
@@ -289,18 +222,24 @@ export default function NavBar() {
         {isMobileVersion ? null : (
           <>
             <Link href="/">
-              <LinkButton title="Início" isActive={router.pathname === "/"} />
+              <Button
+                title="Início"
+                isActive={router.pathname === "/"}
+                variant="link"
+              />
             </Link>
             <Link href="/restaurantes">
-              <LinkButton
+              <Button
                 title="Faça um Pedido"
                 isActive={router.pathname === "/restaurantes"}
+                variant="link"
               />
             </Link>
             <Link href="/planos">
-              <LinkButton
+              <Button
                 title="Cadastre seu Restaurante"
                 isActive={router.pathname === "/planos"}
+                variant="link"
               />
             </Link>
           </>
@@ -313,15 +252,17 @@ export default function NavBar() {
       ) : (
         <Flex gap={5}>
           <Link href="/cadastro">
-            <SecondaryButton
+            <Button
               title="Criar Conta"
               isActive={router.pathname === "/cadastro"}
+              variant="outline"
             />
           </Link>
           <Link href="/entrar">
-            <PrimaryButton
+            <Button
               title="Entrar"
               isActive={router.pathname === "/entrar"}
+              variant="solid"
             />
           </Link>
         </Flex>

@@ -6,7 +6,6 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import {
   Box,
-  Button,
   ButtonProps,
   Flex,
   Image,
@@ -20,6 +19,7 @@ import {
   useBreakpointValue,
   useSteps,
 } from "@chakra-ui/react";
+import Button from "~/components/Form/Button";
 
 interface IButton extends ButtonProps {
   title: string;
@@ -55,25 +55,6 @@ const SignUp: NextPage = () => {
     }
 
     window.alert("Cadastrado");
-  }
-
-  function PrimaryButton({ title, isActive, ...props }: IButton) {
-    return (
-      <Button
-        variant="solid"
-        backgroundColor={isActive ? "blue.700" : "blue.900"}
-        color="green.50"
-        _hover={{
-          backgroundColor: "blue.700",
-        }}
-        _active={{
-          backgroundColor: "blue.900",
-        }}
-        {...props}
-      >
-        {title}
-      </Button>
-    );
   }
 
   function Step0() {
@@ -200,7 +181,8 @@ const SignUp: NextPage = () => {
           </Box>
           {activeStep === 0 ? <Step0 /> : <Step1 />}
           <Flex w="100%" flexDirection="column" mt={10}>
-            <PrimaryButton
+            <Button
+              variant="solid"
               onClick={onSubmit}
               title={activeStep === 0 ? "Próximo" : "Cadastrar"}
             />
