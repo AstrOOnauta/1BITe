@@ -6,10 +6,8 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import {
   Box,
-  ButtonProps,
   Flex,
   Image,
-  Input,
   Step,
   StepIndicator,
   StepSeparator,
@@ -19,12 +17,9 @@ import {
   useBreakpointValue,
   useSteps,
 } from "@chakra-ui/react";
-import Button from "~/components/Form/Button";
 
-interface IButton extends ButtonProps {
-  title: string;
-  isActive?: boolean;
-}
+import Button from "~/components/Form/Button";
+import Input from "~/components/Form/Input";
 
 const SignUp: NextPage = () => {
   const steps = [
@@ -64,19 +59,19 @@ const SignUp: NextPage = () => {
           <Text color="blue.900" fontWeight="bold">
             E-mail
           </Text>
-          <Input borderColor="blue.900" />
+          <Input />
         </Flex>
         <Flex mb={4} w="100%" flexDirection="column">
           <Text color="blue.900" fontWeight="bold">
             Senha
           </Text>
-          <Input borderColor="blue.900" />
+          <Input />
         </Flex>
         <Flex mb={4} w="100%" flexDirection="column">
           <Text color="blue.900" fontWeight="bold">
             Confirmar senha
           </Text>
-          <Input borderColor="blue.900" />
+          <Input />
         </Flex>
       </Flex>
     );
@@ -89,19 +84,19 @@ const SignUp: NextPage = () => {
           <Text color="blue.900" fontWeight="bold">
             Nome completo
           </Text>
-          <Input borderColor="blue.900" />
+          <Input />
         </Flex>
         <Flex mb={4} w="100%" flexDirection="column">
           <Text color="blue.900" fontWeight="bold">
             CPF
           </Text>
-          <Input borderColor="blue.900" />
+          <Input />
         </Flex>
         <Flex mb={4} w="100%" flexDirection="column">
           <Text color="blue.900" fontWeight="bold">
             Telefone
           </Text>
-          <Input borderColor="blue.900" />
+          <Input />
         </Flex>
       </Flex>
     );
