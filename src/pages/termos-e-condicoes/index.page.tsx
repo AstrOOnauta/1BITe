@@ -1,14 +1,14 @@
 import type { NextPage } from "next";
 import { Flex, Text } from "@chakra-ui/react";
 
-const Home: NextPage = () => {
+const PrivacyPolicy: NextPage = () => {
   return (
     <Flex flex={1} alignItems="center" justifyContent="center">
       <Text fontSize="2xl" fontWeight="bold">
-        1BITe
+        Termos de Serviço
       </Text>
     </Flex>
   );
 };
 
-export default Home;
+export default PrivacyPolicy;

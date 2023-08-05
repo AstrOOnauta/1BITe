@@ -1,14 +1,14 @@
 import type { NextPage } from "next";
 import { Flex, Text } from "@chakra-ui/react";
 
-const Home: NextPage = () => {
+const BuyPlan: NextPage = () => {
   return (
     <Flex flex={1} alignItems="center" justifyContent="center">
       <Text fontSize="2xl" fontWeight="bold">
-        1BITe
+        Cadastrar Restaurante
       </Text>
     </Flex>
   );
 };
 
-export default Home;
+export default BuyPlan;
