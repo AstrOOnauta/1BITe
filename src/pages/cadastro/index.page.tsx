@@ -223,7 +223,7 @@ const SignUp: NextPage = () => {
         </Flex>
       </Flex>
     );
-  }, [errors]);
+  }, [errors, show]);
 
   const Step1 = useCallback(() => {
     return (
