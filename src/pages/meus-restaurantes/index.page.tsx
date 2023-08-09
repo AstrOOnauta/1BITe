@@ -105,7 +105,7 @@ const MyRestaurants: NextPage = () => {
               (item) => {
                 return (
                   <Stack key={item.id}>
-                    <Link href="#">
+                    <Link href={`/${item.id}/dashboard`}>
                       <Flex
                         alignItems="center"
                         bg="green.50"
@@ -193,12 +193,14 @@ const MyRestaurants: NextPage = () => {
                         </Td>
                         <Td py={2}>
                           <Flex justifyContent="flex-end">
-                            <Button
-                              isDisabled={item.status !== "active"}
-                              variant="solid"
-                              title="Entrar"
-                              px={16}
-                            />
+                            <Link href={`/${item.id}/dashboard`}>
+                              <Button
+                                isDisabled={item.status !== "active"}
+                                variant="solid"
+                                title="Entrar"
+                                px={16}
+                              />
+                            </Link>
                           </Flex>
                         </Td>
                       </Tr>
@@ -220,7 +222,7 @@ const MyRestaurants: NextPage = () => {
               (item) => {
                 return (
                   <Stack key={item.id}>
-                    <Link href="#">
+                    <Link href={`/${item.id}/dashboard`}>
                       <Flex
                         alignItems="center"
                         bg="green.50"
@@ -315,12 +317,14 @@ const MyRestaurants: NextPage = () => {
                         </Td>
                         <Td py={2}>
                           <Flex justifyContent="flex-end">
-                            <Button
-                              isDisabled={item.status !== "active"}
-                              variant="solid"
-                              title="Entrar"
-                              px={16}
-                            />
+                            <Link href={`/${item.id}/dashboard`}>
+                              <Button
+                                isDisabled={item.status !== "active"}
+                                variant="solid"
+                                title="Entrar"
+                                px={16}
+                              />
+                            </Link>
                           </Flex>
                         </Td>
                       </Tr>

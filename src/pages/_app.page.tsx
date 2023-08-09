@@ -1,11 +1,15 @@
 import { Flex } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import { useRouter } from "next/router";
+
 import NavBar from "~/components/NavBar";
 
 import GlobalContext from "~/shared/contexts/globalContext";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
+  const router = useRouter();
+
   return (
     <GlobalContext>
       <Head>
@@ -91,7 +95,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         />
       </Head>
       <Flex bg="gray.50" flexDir="column" minH="100vh" w="100%" p={6}>
-        <NavBar />
+        {router.pathname.includes("dashboard") ? null : <NavBar />}
         <Component {...pageProps} />
       </Flex>
     </GlobalContext>
