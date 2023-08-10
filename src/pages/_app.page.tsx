@@ -4,6 +4,9 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 
 import NavBar from "~/components/NavBar";
+import SideBar from "~/components/SideBar";
+import PrivateRoutes from "~/routes/private.routes";
+import PublicRoutes from "~/routes/public.routes";
 
 import GlobalContext from "~/shared/contexts/globalContext";
 
@@ -94,10 +97,15 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           key="icon192"
         />
       </Head>
-      <Flex bg="gray.50" flexDir="column" minH="100vh" w="100%" p={6}>
-        {router.pathname.includes("dashboard") ? null : <NavBar />}
-        <Component {...pageProps} />
-      </Flex>
+      {router.pathname.includes("dashboard") ? (
+        <PrivateRoutes>
+          <Component {...pageProps} />
+        </PrivateRoutes>
+      ) : (
+        <PublicRoutes>
+          <Component {...pageProps} />
+        </PublicRoutes>
+      )}
     </GlobalContext>
   );
 };
