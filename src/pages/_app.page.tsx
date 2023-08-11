@@ -1,18 +1,11 @@
-import { Flex } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import { useRouter } from "next/router";
 
-import NavBar from "~/components/NavBar";
-import SideBar from "~/components/SideBar";
-import PrivateRoutes from "~/routes/private.routes";
-import PublicRoutes from "~/routes/public.routes";
+import Routes from "~/routes";
 
 import GlobalContext from "~/shared/contexts/globalContext";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  const router = useRouter();
-
   return (
     <GlobalContext>
       <Head>
@@ -97,15 +90,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           key="icon192"
         />
       </Head>
-      {router.pathname.includes("dashboard") ? (
-        <PrivateRoutes>
-          <Component {...pageProps} />
-        </PrivateRoutes>
-      ) : (
-        <PublicRoutes>
-          <Component {...pageProps} />
-        </PublicRoutes>
-      )}
+      <Routes>
+        <Component {...pageProps} />
+      </Routes>
     </GlobalContext>
   );
 };
