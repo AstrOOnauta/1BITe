@@ -11,6 +11,7 @@
 import { useState } from "react";
 import type { NextPage } from "next";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import {
   AbsoluteCenter,
   Divider,
@@ -50,6 +51,7 @@ const Login: NextPage = () => {
     formState: { errors },
   } = useForm<FormProps>();
   const theme = useTheme();
+  const router = useRouter();
 
   const isMobileVersion = useBreakpointValue({
     base: true,
@@ -63,7 +65,7 @@ const Login: NextPage = () => {
   });
 
   function onSubmit(form: FormProps) {
-    window.alert(`Bem-vindo novamente!`);
+    router.push("/meus-restaurantes");
   }
 
   return (
