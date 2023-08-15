@@ -5,6 +5,8 @@ import Routes from "~/routes";
 
 import GlobalContext from "~/shared/contexts/globalContext";
 
+import "../styles/react-datepicker.css";
+
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <GlobalContext>
