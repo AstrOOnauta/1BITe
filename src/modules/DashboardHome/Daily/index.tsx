@@ -216,7 +216,7 @@ export default function DailyDashboardHome() {
               borderRadius={8}
               p={2}
               pr={6}
-              minW={340}
+              minW={isMobileVersion ? "100%" : 340}
               gap={2}
               alignItems="center"
               boxShadow="md"
@@ -237,7 +237,7 @@ export default function DailyDashboardHome() {
       {init ? (
         <ResponsiveContainer
           width="100%"
-          height={isMobileVersion ? "30%" : "100%"}
+          height={isMobileVersion ? 260 : "100%"}
         >
           <BarChart
             width={500}
