@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import { Flex, Stack } from "@chakra-ui/react";
 import Button from "~/components/Form/Button";
 import DailyDashboardHome from "~/modules/DashboardHome/Daily";
+import WeeklyDashboardHome from "~/modules/DashboardHome/Weekly";
 
 const PERIOD_BUTTONS_DATA = [
   {
@@ -49,7 +50,11 @@ const DashboardHome: NextPage = () => {
           );
         })}
       </Flex>
-      {period === "daily" ? <DailyDashboardHome /> : null}
+      {period === "daily" ? (
+        <DailyDashboardHome />
+      ) : period === "weekly" ? (
+        <WeeklyDashboardHome />
+      ) : null}
     </Stack>
   );
 };
