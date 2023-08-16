@@ -4,6 +4,7 @@ import { Flex, Stack } from "@chakra-ui/react";
 import Button from "~/components/Form/Button";
 import DailyDashboardHome from "~/modules/DashboardHome/Daily";
 import WeeklyDashboardHome from "~/modules/DashboardHome/Weekly";
+import MonthlyDashboardHome from "~/modules/DashboardHome/Monthly";
 
 const PERIOD_BUTTONS_DATA = [
   {
@@ -54,6 +55,8 @@ const DashboardHome: NextPage = () => {
         <DailyDashboardHome />
       ) : period === "weekly" ? (
         <WeeklyDashboardHome />
+      ) : period === "monthly" ? (
+        <MonthlyDashboardHome />
       ) : null}
     </Stack>
   );
