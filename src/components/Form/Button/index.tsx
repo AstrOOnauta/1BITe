@@ -1,4 +1,6 @@
+/* eslint-disable react/display-name */
 /* eslint-disable react/require-default-props */
+import { forwardRef } from "react";
 import {
   Button as ChakraButton,
   ButtonProps,
@@ -11,12 +13,11 @@ interface IButton extends ButtonProps {
   title?: string;
   isActive?: boolean;
 }
-
-export default function Button({ title, isActive, ...props }: IButton) {
+const Button = forwardRef<HTMLInputElement, IButton>((props, ref) => {
   const theme = useTheme();
 
   const solidProps = {
-    backgroundColor: isActive ? "blue.700" : "blue.900",
+    backgroundColor: props.isActive ? "blue.700" : "blue.900",
     color: "green.50",
     _hover: {
       backgroundColor: "blue.700",
@@ -27,9 +28,9 @@ export default function Button({ title, isActive, ...props }: IButton) {
   };
 
   const outlineProps = {
-    color: isActive ? "green.50" : "blue.900",
+    color: props.isActive ? "green.50" : "blue.900",
     borderColor: "blue.900",
-    bg: isActive ? "blue.700" : "transparent",
+    bg: props.isActive ? "blue.700" : "transparent",
     _hover: {
       backgroundColor: `${hexToRgba(theme.colors.blue[900], "0.1")}`,
       color: "blue.900",
@@ -45,7 +46,7 @@ export default function Button({ title, isActive, ...props }: IButton) {
     h: 8,
     borderRadius: 0,
     borderBottomWidth: 2,
-    borderColor: isActive ? "blue.900" : "transparent",
+    borderColor: props.isActive ? "blue.900" : "transparent",
     bg: "none",
     color: "blue.900",
     _hover: {
@@ -73,8 +74,10 @@ export default function Button({ title, isActive, ...props }: IButton) {
   }
 
   return (
-    <ChakraButton {...getVariantProps()} {...props}>
-      {props.children || title}
+    <ChakraButton {...getVariantProps()} {...props} ref={ref}>
+      {props.children || props.title}
     </ChakraButton>
   );
-}
+});
+
+export default Button;

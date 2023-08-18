@@ -3,7 +3,7 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable sonarjs/no-duplicate-string */
-import { useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import {
@@ -32,6 +32,7 @@ import {
   MdStarOutline,
 } from "react-icons/md";
 
+import SidebarContext from "~/shared/contexts/sidebarProvider";
 import Button from "../Form/Button";
 
 interface SideBarProps {
@@ -39,7 +40,7 @@ interface SideBarProps {
 }
 
 export default function SideBar({ closeDrawer }: SideBarProps) {
-  const [isExpanded, setIsExpanded] = useState(true);
+  const { isExpanded, setIsExpanded } = useContext(SidebarContext);
 
   const router = useRouter();
   const { restaurantId } = router.query;
@@ -108,8 +109,8 @@ export default function SideBar({ closeDrawer }: SideBarProps) {
   }
 
   useEffect(() => {
-    if (isTabletVersion) {
-      setIsExpanded(true);
+    if (!isTabletVersion && closeDrawer) {
+      closeDrawer();
     }
   }, [isTabletVersion]);
 
@@ -150,7 +151,7 @@ export default function SideBar({ closeDrawer }: SideBarProps) {
             >
               <Flex gap={2} w={isExpanded ? "140px" : "100%"}>
                 {router.asPath === item.path ? item.activatedIcon : item.icon}
-                {isExpanded ? (
+                {isTabletVersion || isExpanded ? (
                   <Text
                     color={
                       router.asPath === item.path ? "green.50" : "blue.900"
