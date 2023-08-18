@@ -103,6 +103,14 @@ export default function DailyDashboardHome() {
     md: false,
   });
 
+  const isLaptopVersion = useBreakpointValue({
+    base: true,
+    md: true,
+    lg: true,
+    xl: true,
+    "2xl": false,
+  });
+
   function nextDay() {
     if (date) {
       setDate(addDays(date, 1));
@@ -235,61 +243,76 @@ export default function DailyDashboardHome() {
         })}
       </Flex>
       {init ? (
-        <ResponsiveContainer
-          width="100%"
-          height={isMobileVersion ? 260 : "100%"}
-        >
-          <BarChart
-            width={500}
-            height={300}
-            data={GRAPH_DATA}
-            margin={{
-              top: 5,
-              right: isMobileVersion ? 5 : 30,
-              left: 20,
-              bottom: 20,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis
-              dataKey="date"
-              tickFormatter={(item) => format(parseISO(item), "HH")}
+        <Stack w="100%" flex={1} position="relative">
+          <Stack position="absolute" width="100%" height="100%">
+            <ResponsiveContainer
+              width="100%"
+              height={isMobileVersion ? 260 : isLaptopVersion ? 420 : "100%"}
             >
-              <Label value="Horário (h)" offset={-12} position="insideBottom" />
-            </XAxis>
-            <YAxis allowDecimals={false}>
-              <Label
-                value="Faturamento (R$)"
-                angle={-90}
-                position={isMobileVersion ? "insideBottomLeft" : "insideLeft"}
-              />
-            </YAxis>
-            <Tooltip
-              labelFormatter={(value) =>
-                `Horário : ${format(parseISO(value), "HH")}-${format(
-                  addHours(parseISO(value), 1),
-                  "HH"
-                )}h`
-              }
-              labelStyle={{
-                color: theme.colors.blue[900],
-                fontWeight: "bold",
-              }}
-              formatter={(value) => [`R$ ${value}`, "Faturamento"]}
-              itemStyle={{
-                color: theme.colors.green[300],
-                fontWeight: "bold",
-              }}
-              contentStyle={{
-                backgroundColor: theme.colors.green[50],
-                borderColor: theme.colors.blue[900],
-                borderRadius: 4,
-                boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
-              }}
-            />
-            <Bar dataKey="value" fill={theme.colors.blue[900]} />
-          </BarChart>
-        </ResponsiveContainer>
+              <BarChart
+                width={500}
+                height={300}
+                data={GRAPH_DATA}
+                margin={{
+                  top: 5,
+                  right: isMobileVersion ? 5 : 30,
+                  left: 20,
+                  bottom: 20,
+                }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis
+                  dataKey="date"
+                  tickFormatter={(item) => format(parseISO(item), "HH")}
+                >
+                  <Label
+                    value="Horário (h)"
+                    offset={-12}
+                    position="insideBottom"
+                  />
+                </XAxis>
+                <YAxis allowDecimals={false}>
+                  <Label
+                    value="Faturamento (R$)"
+                    angle={-90}
+                    position={
+                      isMobileVersion ? "insideBottomLeft" : "insideLeft"
+                    }
+                  />
+                </YAxis>
+                <Tooltip
+                  labelFormatter={(value) =>
+                    `Horário : ${format(parseISO(value), "HH")}-${format(
+                      addHours(parseISO(value), 1),
+                      "HH"
+                    )}h`
+                  }
+                  labelStyle={{
+                    color: theme.colors.blue[900],
+                    fontWeight: "bold",
+                  }}
+                  formatter={(value) => [
+                    `R$ ${value.toLocaleString("pt-BR", {
+                      minimumFractionDigits: 2,
+                    })}`,
+                    "Faturamento",
+                  ]}
+                  itemStyle={{
+                    color: theme.colors.green[300],
+                    fontWeight: "bold",
+                  }}
+                  contentStyle={{
+                    backgroundColor: theme.colors.green[50],
+                    borderColor: theme.colors.blue[900],
+                    borderRadius: 4,
+                    boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
+                  }}
+                />
+                <Bar dataKey="value" fill={theme.colors.blue[900]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </Stack>
+        </Stack>
       ) : null}
     </Stack>
   );

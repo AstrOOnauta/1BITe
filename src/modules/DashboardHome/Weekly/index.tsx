@@ -90,6 +90,14 @@ export default function WeeklyDashboardHome() {
     md: false,
   });
 
+  const isLaptopVersion = useBreakpointValue({
+    base: true,
+    md: true,
+    lg: true,
+    xl: true,
+    "2xl": false,
+  });
+
   function nextWeek() {
     if (startDate && endDate) {
       setStartDate(addDays(startDate, 7));
@@ -236,70 +244,78 @@ export default function WeeklyDashboardHome() {
         })}
       </Flex>
       {init ? (
-        <Stack w="100%" flex={1}>
-          <ResponsiveContainer
-            width="100%"
-            height={isMobileVersion ? 260 : "100%"}
-          >
-            <BarChart
-              width={500}
-              height={300}
-              data={GRAPH_DATA}
-              margin={{
-                top: 5,
-                right: isMobileVersion ? 5 : 30,
-                left: 20,
-                bottom: 20,
-              }}
+        <Stack w="100%" flex={1} position="relative">
+          <Stack position="absolute" width="100%" height="100%">
+            <ResponsiveContainer
+              width="100%"
+              height={isMobileVersion ? 260 : isLaptopVersion ? 420 : "100%"}
             >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis
-                dataKey="date"
-                tickFormatter={(item) => format(parseISO(item), "dd/MM/yy")}
+              <BarChart
+                width={500}
+                height={300}
+                data={GRAPH_DATA}
+                margin={{
+                  top: 5,
+                  right: isMobileVersion ? 5 : 30,
+                  left: 20,
+                  bottom: 20,
+                }}
               >
-                <Label
-                  value="Dia da Semana"
-                  offset={-12}
-                  position="insideBottom"
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis
+                  dataKey="date"
+                  tickFormatter={(item) => format(parseISO(item), "dd/MM/yy")}
+                >
+                  <Label
+                    value="Dia da Semana"
+                    offset={-12}
+                    position="insideBottom"
+                  />
+                </XAxis>
+                <YAxis allowDecimals={false}>
+                  <Label
+                    value="Faturamento (R$)"
+                    angle={-90}
+                    position={
+                      isMobileVersion ? "insideBottomLeft" : "insideLeft"
+                    }
+                  />
+                </YAxis>
+                <Tooltip
+                  labelFormatter={(value) =>
+                    `Data : ${format(
+                      parseISO(value),
+                      "dd 'de' MMMM 'de' yyyy",
+                      {
+                        locale: ptBR,
+                      }
+                    )}`
+                  }
+                  labelStyle={{
+                    color: theme.colors.blue[900],
+                    fontWeight: "bold",
+                  }}
+                  formatter={(value) => [
+                    `R$ ${value.toLocaleString("pt-BR", {
+                      minimumFractionDigits: 2,
+                    })}`,
+                    "Faturamento",
+                  ]}
+                  itemStyle={{
+                    color: theme.colors.green[300],
+                    fontWeight: "bold",
+                  }}
+                  contentStyle={{
+                    backgroundColor: theme.colors.green[50],
+                    borderColor: theme.colors.blue[900],
+                    borderRadius: 4,
+                    boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
+                  }}
                 />
-              </XAxis>
-              <YAxis allowDecimals={false}>
-                <Label
-                  value="Faturamento (R$)"
-                  angle={-90}
-                  position={isMobileVersion ? "insideBottomLeft" : "insideLeft"}
-                />
-              </YAxis>
-              <Tooltip
-                labelFormatter={(value) =>
-                  `Data : ${format(parseISO(value), "dd 'de' MMMM 'de' yyyy", {
-                    locale: ptBR,
-                  })}`
-                }
-                labelStyle={{
-                  color: theme.colors.blue[900],
-                  fontWeight: "bold",
-                }}
-                formatter={(value) => [
-                  `R$ ${value.toLocaleString("pt-BR", {
-                    minimumFractionDigits: 2,
-                  })}`,
-                  "Faturamento",
-                ]}
-                itemStyle={{
-                  color: theme.colors.green[300],
-                  fontWeight: "bold",
-                }}
-                contentStyle={{
-                  backgroundColor: theme.colors.green[50],
-                  borderColor: theme.colors.blue[900],
-                  borderRadius: 4,
-                  boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
-                }}
-              />
-              <Bar dataKey="value" fill={theme.colors.blue[900]} />
-            </BarChart>
-          </ResponsiveContainer>
+                <Bar dataKey="value" fill={theme.colors.blue[900]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </Stack>
         </Stack>
       ) : null}
     </Stack>
