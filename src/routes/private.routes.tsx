@@ -13,7 +13,7 @@ const PrivateRoutes: React.FC<ChildrenInterface> = ({ children }) => {
   });
 
   return (
-    <Flex h="100vh">
+    <Flex minH="100vh" overflow="hidden">
       {isTabletVersion ? null : <SideBar />}
       <Stack w="100%">
         <DashboardHeader />
