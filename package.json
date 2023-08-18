@@ -29,6 +29,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "7.45.3",
     "react-icons": "4.10.1",
+    "react-select": "^5.7.4",
     "recharts": "2.7.3"
   },
   "devDependencies": {
