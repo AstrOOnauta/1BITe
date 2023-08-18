@@ -23,7 +23,7 @@ const Button = forwardRef<HTMLInputElement, IButton>((props, ref) => {
       backgroundColor: "blue.700",
     },
     _active: {
-      backgroundColor: "blue.900",
+      backgroundColor: "blue.700",
     },
   };
 
@@ -31,13 +31,13 @@ const Button = forwardRef<HTMLInputElement, IButton>((props, ref) => {
     color: props.isActive ? "green.50" : "blue.900",
     borderColor: "blue.900",
     bg: props.isActive ? "blue.700" : "transparent",
+    _active: {
+      color: props.isActive ? "green.50" : "blue.500",
+      borderColor: "blue.500",
+    },
     _hover: {
       backgroundColor: `${hexToRgba(theme.colors.blue[900], "0.1")}`,
       color: "blue.900",
-    },
-    _active: {
-      color: "blue.500",
-      borderColor: "blue.500",
     },
   };
 
