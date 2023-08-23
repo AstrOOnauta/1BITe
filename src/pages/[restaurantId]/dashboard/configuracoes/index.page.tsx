@@ -14,6 +14,14 @@ import {
   Text,
   theme,
   useBreakpointValue,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import { MdAddPhotoAlternate, MdDelete, MdInfoOutline } from "react-icons/md";
 import Select, { GroupBase, MultiValue } from "react-select";
@@ -44,6 +52,8 @@ const DashboardSettings: NextPage = () => {
   const [selectedDays, setSelectedDays] = useState<MultiValue<
     ReactSelectInterface | GroupBase<ReactSelectInterface>
   > | null>(null);
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const isMobileVersion = useBreakpointValue({
     base: true,
@@ -118,9 +128,9 @@ const DashboardSettings: NextPage = () => {
               Horário {isTabletVersion ? "" : "de Funcionamento"}
             </Text>
             <Flex justifyContent="space-between" alignItems="center" gap={2}>
-              <Input type="time" />
+              <Input type="time" placeholder="Início" />
               -
-              <Input type="time" />
+              <Input type="time" placeholder="Final" />
             </Flex>
           </Stack>
         </Stack>
@@ -168,6 +178,46 @@ const DashboardSettings: NextPage = () => {
 
   return (
     <Stack flex={1} overflowY="auto">
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        size={isMobileVersion ? "xs" : "md"}
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Horário de Funcionamento Automático</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text color="blue.900" lineHeight="short">
+              A programação de horário de funcionamento do seu restaurante é um
+              recurso valioso para mante-lo fiel aos seus clientes. Com ele é
+              possível abrir e fechar seu restaurante de forma eficiente de
+              acordo com os dias e horários configurados.
+            </Text>
+            <Stack bg="green.300" borderRadius="md" px={2} py={3} mt={4}>
+              <Text
+                fontSize="xs"
+                fontWeight="semibold"
+                color="blue.900"
+                lineHeight="shorter"
+              >
+                <Text as="span" fontWeight="bold">
+                  Cuidado:{" "}
+                </Text>
+                ao ativa-lo, seu restaurante estavá visível para o público de
+                acordo com os dias e horarios estabelecidos na configuração.
+                Portanto, recomendamos revisar cuidadosamente suas configurações
+                antes de ativar essa funcionalidade para garantir que
+                corresponda às suas intenções e à capacidade operacional do seu
+                estabelecimento.
+              </Text>
+            </Stack>
+          </ModalBody>
+          <ModalFooter>
+            <Button variant="solid" title="OK" onClick={onClose} />
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
       <Stack flex={1} p={7} overflowY="auto">
         <Stack>
           <Flex
@@ -268,6 +318,7 @@ const DashboardSettings: NextPage = () => {
                 <Stack
                   position="relative"
                   w={isMobileVersion ? 120 : isTabletVersion ? 200 : 240}
+                  h={isMobileVersion ? 120 : isTabletVersion ? 200 : 240}
                 >
                   <FormLabel
                     htmlFor="profileFileInput"
@@ -457,20 +508,23 @@ const DashboardSettings: NextPage = () => {
           >
             Programar Horário de Funcionamento Automático
           </Text>
-          <Flex pt={2} gap={1}>
-            <Checkbox colorScheme="whatsapp">
+          <Flex pt={2} gap={2} alignItems="flex-start">
+            <Checkbox colorScheme="whatsapp" mt={1} />
+            <Text>
               Ativar abertura automática do restaurante
-            </Checkbox>
-            <Button
-              colorScheme="none"
-              borderRadius="full"
-              p={0}
-              size="xs"
-              bg="green.300"
-              _hover={{ backgroundColor: "green.200" }}
-            >
-              <MdInfoOutline size={20} color={theme.colors.blue[900]} />
-            </Button>
+              <Button
+                colorScheme="none"
+                borderRadius="full"
+                p={0}
+                ml={2}
+                size="xs"
+                bg="green.300"
+                _hover={{ backgroundColor: "green.200" }}
+                onClick={onOpen}
+              >
+                <MdInfoOutline size={20} color={theme.colors.blue[900]} />
+              </Button>
+            </Text>
           </Flex>
         </Stack>
       </Stack>
