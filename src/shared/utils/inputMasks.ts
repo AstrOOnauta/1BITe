@@ -8,6 +8,21 @@ export function cpfMask(value: string) {
     .replace(/(-\d{2})\d+?$/, "$1");
 }
 
+export function zipCodeMask(value: string) {
+  return value.replace(/\D/g, "").replace(/(\d{5})(\d)/, "$1-$2");
+}
+
+export function brCurrencyMask(value: string) {
+  return Number(
+    value
+      .replace(/(.*){1}/, "0$1")
+      .replace(/[^\d]/g, "")
+      .replace(/(\d\d?)$/, ".$1")
+  ).toLocaleString("pt-BR", {
+    minimumFractionDigits: 2,
+  });
+}
+
 export function brPhoneNumberMask(value: string) {
   const matrix = "## ##### ####";
 
