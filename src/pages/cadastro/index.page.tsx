@@ -33,6 +33,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 import Button from "~/components/Form/Button";
 import Input from "~/components/Form/Input";
+import { brPhoneNumberMask, cpfMask } from "~/shared/utils/inputMasks";
 
 interface FormProps {
   email: string;
@@ -83,30 +84,6 @@ const SignUp: NextPage = () => {
     md: true,
     lg: false,
   });
-
-  function cpfMask(value: string) {
-    return value
-      .replace(/\D/g, "")
-      .replace(/(\d{3})(\d)/, "$1.$2")
-      .replace(/(\d{3})(\d)/, "$1.$2")
-      .replace(/(\d{3})(\d{1,2})/, "$1-$2")
-      .replace(/(-\d{2})\d+?$/, "$1");
-  }
-
-  function brPhoneNumberMask(value: string) {
-    const matrix = "## ##### ####";
-
-    let i = 0;
-    const newValue = value.replace(/\D/g, "");
-
-    return matrix.replace(/(?!\+)./g, (a) => {
-      return /[#\d]/.test(a) && i < newValue.length
-        ? newValue.charAt(i++)
-        : i >= newValue.length
-        ? ""
-        : a;
-    });
-  }
 
   function onSubmit(form: FormProps) {
     if (activeStep === 0) {
