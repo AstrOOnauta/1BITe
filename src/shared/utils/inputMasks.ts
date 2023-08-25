@@ -9,7 +9,10 @@ export function cpfMask(value: string) {
 }
 
 export function zipCodeMask(value: string) {
-  return value.replace(/\D/g, "").replace(/(\d{5})(\d)/, "$1-$2");
+  return value
+    .replace(/\D/g, "")
+    .replace(/(\d{5})(\d)/, "$1-$2")
+    .substring(0, 9);
 }
 
 export function brCurrencyMask(value: string) {
