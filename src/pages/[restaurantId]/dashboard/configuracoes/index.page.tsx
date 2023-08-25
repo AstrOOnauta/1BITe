@@ -340,50 +340,50 @@ const DashboardSettings: NextPage = () => {
 
   return (
     <Stack flex={1} overflowY="auto">
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        size={isMobileVersion ? "xs" : "md"}
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Horário de Funcionamento Automático</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text color="blue.900" lineHeight="short">
+              A programação de horário de funcionamento do seu restaurante é um
+              recurso valioso para mante-lo fiel aos seus clientes. Com ele é
+              possível abrir e fechar seu restaurante de forma eficiente de
+              acordo com os dias e horários configurados.
+            </Text>
+            <Stack bg="green.300" borderRadius="md" px={2} py={3} mt={4}>
+              <Text
+                fontSize="xs"
+                fontWeight="semibold"
+                color="blue.900"
+                lineHeight="shorter"
+              >
+                <Text as="span" fontWeight="bold">
+                  Cuidado:{" "}
+                </Text>
+                ao ativa-lo, seu restaurante estavá visível para o público de
+                acordo com os dias e horarios estabelecidos na configuração.
+                Portanto, recomendamos revisar cuidadosamente suas configurações
+                antes de ativar essa funcionalidade para garantir que
+                corresponda às suas intenções e à capacidade operacional do seu
+                estabelecimento.
+              </Text>
+            </Stack>
+          </ModalBody>
+          <ModalFooter>
+            <Button variant="solid" title="OK" onClick={onClose} />
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        style={{ width: "100%", flex: 1 }}
+        style={{ width: "100%", flex: 1, overflowY: "auto" }}
       >
-        <Modal
-          isOpen={isOpen}
-          onClose={onClose}
-          size={isMobileVersion ? "xs" : "md"}
-        >
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Horário de Funcionamento Automático</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <Text color="blue.900" lineHeight="short">
-                A programação de horário de funcionamento do seu restaurante é
-                um recurso valioso para mante-lo fiel aos seus clientes. Com ele
-                é possível abrir e fechar seu restaurante de forma eficiente de
-                acordo com os dias e horários configurados.
-              </Text>
-              <Stack bg="green.300" borderRadius="md" px={2} py={3} mt={4}>
-                <Text
-                  fontSize="xs"
-                  fontWeight="semibold"
-                  color="blue.900"
-                  lineHeight="shorter"
-                >
-                  <Text as="span" fontWeight="bold">
-                    Cuidado:{" "}
-                  </Text>
-                  ao ativa-lo, seu restaurante estavá visível para o público de
-                  acordo com os dias e horarios estabelecidos na configuração.
-                  Portanto, recomendamos revisar cuidadosamente suas
-                  configurações antes de ativar essa funcionalidade para
-                  garantir que corresponda às suas intenções e à capacidade
-                  operacional do seu estabelecimento.
-                </Text>
-              </Stack>
-            </ModalBody>
-            <ModalFooter>
-              <Button variant="solid" title="OK" onClick={onClose} />
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
         <Stack flex={1} p={7} overflowY="auto">
           <Stack>
             <Flex
@@ -836,18 +836,23 @@ const DashboardSettings: NextPage = () => {
             </Flex>
           </Stack>
         </Stack>
-        {isMobileVersion ? (
-          <Flex
-            width="100%"
-            alignItems="center"
-            justifyContent="center"
-            p={4}
-            bg="green.50"
-          >
-            <Button width="100%" variant="solid" title="Salvar" type="submit" />
-          </Flex>
-        ) : null}
       </form>
+      {isMobileVersion ? (
+        <Flex
+          width="100%"
+          alignItems="center"
+          justifyContent="center"
+          p={4}
+          bg="green.50"
+        >
+          <Button
+            width="100%"
+            variant="solid"
+            title="Salvar"
+            onClick={handleSubmit(onSubmit)}
+          />
+        </Flex>
+      ) : null}
     </Stack>
   );
 };
