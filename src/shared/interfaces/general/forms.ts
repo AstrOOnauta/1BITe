@@ -8,6 +8,7 @@ export interface DashboardSettingsFormProps {
   startHour: string;
   endHour: string;
   zipCode: string;
+  state: string;
   city: string;
   neighborhood: string;
   street: string;

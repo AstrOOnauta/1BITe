@@ -63,14 +63,26 @@ export default function AddressForm({
         />
       </Stack>
       <Stack gap={2} justifyContent="space-between" w="100%">
-        <ControlledInput
-          name="city"
-          label="Cidade"
-          placeholder="Digite a cidade"
-          register={register}
-          errors={errors}
-          setValue={setValue}
-        />
+        <Flex w="100%" gap={2}>
+          <Stack w="50%">
+            <ControlledInput
+              name="state"
+              label="Estado"
+              placeholder="Digite o estado"
+              register={register}
+              errors={errors}
+              setValue={setValue}
+            />
+          </Stack>
+          <ControlledInput
+            name="city"
+            label="Cidade"
+            placeholder="Digite a cidade"
+            register={register}
+            errors={errors}
+            setValue={setValue}
+          />
+        </Flex>
         <Flex w="100%" gap={2}>
           <ControlledInput
             name="street"

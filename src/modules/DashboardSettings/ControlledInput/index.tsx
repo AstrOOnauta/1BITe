@@ -48,7 +48,7 @@ export default function ControlledInput({
           onChange: (e: ChangeEvent<HTMLInputElement>) =>
             setValue(name, brCurrencyMask(e.target.value)),
         }
-      : name === "number"
+      : name === "number" || name === "state"
       ? { required: "Necessário!" }
       : { required: "Campo necessário!" };
   }
