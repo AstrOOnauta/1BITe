@@ -48,6 +48,8 @@ export default function ControlledInput({
           onChange: (e: ChangeEvent<HTMLInputElement>) =>
             setValue(name, brCurrencyMask(e.target.value)),
         }
+      : name === "number"
+      ? { required: "Necessário!" }
       : { required: "Campo necessário!" };
   }
 
@@ -64,7 +66,7 @@ export default function ControlledInput({
           type={
             name === "startHour" || name === "endHour"
               ? "time"
-              : name === "number" || name === "distanceDeliveryCharge"
+              : name === "distanceDeliveryCharge"
               ? "number"
               : "text"
           }

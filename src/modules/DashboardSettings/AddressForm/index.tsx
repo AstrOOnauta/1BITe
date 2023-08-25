@@ -20,46 +20,78 @@ export default function AddressForm({
     md: false,
   });
 
-  const aditionalLabel = isMobileVersion ? "" : "do Restaurante";
+  const isTabletVersion = useBreakpointValue({
+    base: true,
+    md: true,
+    lg: false,
+  });
+
+  const isLaptopVersion = useBreakpointValue({
+    base: true,
+    md: true,
+    lg: true,
+    xl: true,
+    "2xl": false,
+  });
 
   return (
-    <Stack width="100%">
-      <Flex gap={2}>
+    <Flex
+      width="100%"
+      gap={2}
+      flexDirection={isMobileVersion ? "column" : "row"}
+    >
+      <Stack
+        gap={2}
+        justifyContent="space-between"
+        w={isTabletVersion ? "100%" : isLaptopVersion ? "60%" : "100%"}
+      >
         <ControlledInput
           name="zipCode"
-          label={`CEP ${aditionalLabel}`}
-          placeholder="Digite o CEP do seu restaurante"
+          label="CEP"
+          placeholder="Digite o CEP"
           register={register}
           errors={errors}
           setValue={setValue}
         />
-        <ControlledInput
-          name="street"
-          label={`Rua ${aditionalLabel}`}
-          placeholder="Digite a rua do seu restaurante"
-          register={register}
-          errors={errors}
-          setValue={setValue}
-        />
-      </Flex>
-      <Flex gap={2} alignItems="flex-start">
         <ControlledInput
           name="neighborhood"
-          label={`Bairro ${aditionalLabel}`}
-          placeholder="Digite o bairro do seu restaurante"
+          label="Bairro"
+          placeholder="Digite o bairro"
           register={register}
           errors={errors}
           setValue={setValue}
         />
+      </Stack>
+      <Stack gap={2} justifyContent="space-between" w="100%">
         <ControlledInput
-          name="number"
-          label={`Número ${aditionalLabel}`}
-          placeholder="Digite o número do seu restaurante"
+          name="city"
+          label="Cidade"
+          placeholder="Digite a cidade"
           register={register}
           errors={errors}
           setValue={setValue}
         />
-      </Flex>
-    </Stack>
+        <Flex w="100%" gap={2}>
+          <ControlledInput
+            name="street"
+            label="Rua"
+            placeholder="Digite a rua"
+            register={register}
+            errors={errors}
+            setValue={setValue}
+          />
+          <Stack w="50%">
+            <ControlledInput
+              name="number"
+              label="Nº"
+              placeholder="Número"
+              register={register}
+              errors={errors}
+              setValue={setValue}
+            />
+          </Stack>
+        </Flex>
+      </Stack>
+    </Flex>
   );
 }

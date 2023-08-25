@@ -148,7 +148,13 @@ const DashboardSettings: NextPage = () => {
                   />
                   <Stack
                     width={
-                      isMobileVersion ? "100%" : isTabletVersion ? "44%" : "33%"
+                      isMobileVersion
+                        ? "100%"
+                        : isTabletVersion
+                        ? "44%"
+                        : isLaptopVersion
+                        ? "60%"
+                        : "33%"
                     }
                   >
                     <ControlledInput

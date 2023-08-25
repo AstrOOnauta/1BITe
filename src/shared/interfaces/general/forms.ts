@@ -8,8 +8,9 @@ export interface DashboardSettingsFormProps {
   startHour: string;
   endHour: string;
   zipCode: string;
-  street: string;
+  city: string;
   neighborhood: string;
+  street: string;
   number: string;
   states: GroupBase<ReactSelectInterface>;
   cities: GroupBase<ReactSelectInterface>;

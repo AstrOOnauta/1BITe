@@ -43,11 +43,12 @@ export default function OperationForm({
   });
 
   return (
-    <Stack width="100%">
+    <Stack width={isTabletVersion ? "100%" : isLaptopVersion ? "65%" : "100%"}>
       <Stack
         width={
-          isMobileVersion || isTabletVersion || isLaptopVersion ? "100%" : "50%"
+          isMobileVersion || isTabletVersion || isLaptopVersion ? "100%" : "60%"
         }
+        gap={2}
         justifyContent="space-between"
       >
         <ControlledSelect
