@@ -59,7 +59,7 @@ export default function OperationForm({
           errors={errors}
         />
         <Stack width="100%">
-          <Text fontWeight="semibold" color="blue.900">
+          <Text fontWeight="semibold" color="blue.900" mb={-1}>
             Horário {isMobileVersion ? "" : "de Funcionamento"}
           </Text>
           <Flex justifyContent="space-between" alignItems="flex-start" gap={2}>

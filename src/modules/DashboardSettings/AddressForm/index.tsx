@@ -53,14 +53,16 @@ export default function AddressForm({
           errors={errors}
           setValue={setValue}
         />
-        <ControlledInput
-          name="neighborhood"
-          label="Bairro"
-          placeholder="Digite o bairro"
-          register={register}
-          errors={errors}
-          setValue={setValue}
-        />
+        <Stack pb={!isTabletVersion && errors.number ? 5 : 0}>
+          <ControlledInput
+            name="neighborhood"
+            label="Bairro"
+            register={register}
+            errors={errors}
+            setValue={setValue}
+            disabled
+          />
+        </Stack>
       </Stack>
       <Stack gap={2} justifyContent="space-between" w="100%">
         <Flex w="100%" gap={2}>
@@ -68,29 +70,29 @@ export default function AddressForm({
             <ControlledInput
               name="state"
               label="Estado"
-              placeholder="Digite o estado"
               register={register}
               errors={errors}
               setValue={setValue}
+              disabled
             />
           </Stack>
           <ControlledInput
             name="city"
             label="Cidade"
-            placeholder="Digite a cidade"
             register={register}
             errors={errors}
             setValue={setValue}
+            disabled
           />
         </Flex>
         <Flex w="100%" gap={2}>
           <ControlledInput
             name="street"
             label="Rua"
-            placeholder="Digite a rua"
             register={register}
             errors={errors}
             setValue={setValue}
+            disabled
           />
           <Stack w="50%">
             <ControlledInput

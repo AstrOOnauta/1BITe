@@ -2,8 +2,15 @@ import {
   CitiesResponse,
   NeighbourhoodsResponse,
   StatesResponse,
+  ZipCodeResponse,
 } from "~/shared/interfaces/responses/brasilAberto";
 import { brasilAbertoApi } from ".";
+
+export const getZipCode = (zipCode: string) => {
+  const endpoint = `/zipcode/${zipCode}`;
+
+  return brasilAbertoApi.get<ZipCodeResponse>(endpoint);
+};
 
 export const getStates = () => {
   const endpoint = "/states";

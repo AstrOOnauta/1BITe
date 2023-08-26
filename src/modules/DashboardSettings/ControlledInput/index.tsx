@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/cognitive-complexity */
 /* eslint-disable sonarjs/no-duplicate-string */
 /* eslint-disable react/require-default-props */
 import { ChangeEvent } from "react";
@@ -19,6 +20,7 @@ interface ControlledInputProps {
   register: UseFormRegister<DashboardSettingsFormProps>;
   errors: FieldErrors<DashboardSettingsFormProps>;
   setValue: UseFormSetValue<DashboardSettingsFormProps>;
+  disabled?: boolean;
 }
 
 export default function ControlledInput({
@@ -28,6 +30,7 @@ export default function ControlledInput({
   register,
   errors,
   setValue,
+  disabled,
 }: ControlledInputProps) {
   function getRegisterOptions() {
     return name === "phoneNumber"
@@ -48,15 +51,20 @@ export default function ControlledInput({
           onChange: (e: ChangeEvent<HTMLInputElement>) =>
             setValue(name, brCurrencyMask(e.target.value)),
         }
-      : name === "number" || name === "state"
+      : name === "number"
       ? { required: "Necessário!" }
+      : name === "state" ||
+        name === "city" ||
+        name === "neighborhood" ||
+        name === "street"
+      ? {}
       : { required: "Campo necessário!" };
   }
 
   return (
     <Stack w="100%">
       {label ? (
-        <Text fontWeight="semibold" color="blue.900">
+        <Text fontWeight="semibold" color="blue.900" mb={-1}>
           {label}
         </Text>
       ) : null}
@@ -74,6 +82,7 @@ export default function ControlledInput({
           placeholder={placeholder}
           textAlign={name === "distanceDeliveryCharge" ? "right" : "left"}
           {...register(name, getRegisterOptions())}
+          isDisabled={disabled}
         />
         {errors && errors[name] ? (
           <FormErrorMessage mt={0}>{errors[name]?.message}</FormErrorMessage>

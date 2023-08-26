@@ -59,7 +59,7 @@ export default function ControlledSelect({
   return (
     <Stack w="100%">
       {label ? (
-        <Text fontWeight="semibold" color="blue.900">
+        <Text fontWeight="semibold" color="blue.900" mb={-1}>
           {label}
         </Text>
       ) : null}

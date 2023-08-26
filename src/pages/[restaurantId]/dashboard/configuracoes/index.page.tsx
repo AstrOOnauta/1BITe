@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable sonarjs/cognitive-complexity */
 /* eslint-disable consistent-return */
-import { useState } from "react";
 import type { NextPage } from "next";
+import { useState, useEffect } from "react";
 import {
   Checkbox,
   Flex,
@@ -27,6 +27,8 @@ import CoverPictureForm from "~/modules/DashboardSettings/CoverPictureForm";
 
 import { getBase64 } from "~/shared/utils/getBase64";
 import { DashboardSettingsFormProps } from "~/shared/interfaces/general/forms";
+import { getZipCode } from "~/shared/services/api/brasilAberto";
+import ErrorModalContent from "~/modules/DashboardSettings/ErrorModalOpen";
 
 const DashboardSettings: NextPage = () => {
   const [coverPicture, setCoverPicture] = useState<string>("");
@@ -38,8 +40,18 @@ const DashboardSettings: NextPage = () => {
     formState: { errors },
     setValue,
     control,
+    watch,
   } = useForm<DashboardSettingsFormProps>();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isInfoModalOpen,
+    onOpen: onInfoModalOpen,
+    onClose: onInfoModalClose,
+  } = useDisclosure();
+  const {
+    isOpen: isErrorModalOpen,
+    onOpen: onErrorModalOpen,
+    onClose: onErrorModalClose,
+  } = useDisclosure();
 
   const isMobileVersion = useBreakpointValue({
     base: true,
@@ -59,6 +71,8 @@ const DashboardSettings: NextPage = () => {
     xl: true,
     "2xl": false,
   });
+
+  const watchZipCode = watch("zipCode");
 
   function onSubmit(form: DashboardSettingsFormProps) {
     return window.alert(
@@ -88,14 +102,44 @@ const DashboardSettings: NextPage = () => {
     }
   }
 
+  useEffect(() => {
+    if (watchZipCode && watchZipCode.length === 9) {
+      getZipCode(watchZipCode)
+        .then((res) => {
+          setValue("state", res.data.result.stateShortname);
+          setValue("city", res.data.result.city);
+          setValue("neighborhood", res.data.result.district);
+          setValue("street", res.data.result.street);
+        })
+        .catch((error) => {
+          if (error.response.status === 404) {
+            setValue("zipCode", "");
+            return onErrorModalOpen();
+          }
+        });
+    } else {
+      setValue("state", "");
+      setValue("city", "");
+      setValue("neighborhood", "");
+      setValue("street", "");
+    }
+  }, [watchZipCode]);
+
   return (
     <Stack flex={1} overflowY="auto">
       <Modal
-        isOpen={isOpen}
-        onClose={onClose}
+        isOpen={isInfoModalOpen}
+        onClose={onInfoModalClose}
         size={isMobileVersion ? "xs" : "md"}
       >
-        <InfoModalContent onClose={onClose} />
+        <InfoModalContent onClose={onInfoModalClose} />
+      </Modal>
+      <Modal
+        isOpen={isErrorModalOpen}
+        onClose={onErrorModalClose}
+        size={isMobileVersion ? "xs" : "md"}
+      >
+        <ErrorModalContent onClose={onErrorModalClose} />
       </Modal>
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -252,7 +296,7 @@ const DashboardSettings: NextPage = () => {
               <Stack
                 w={isMobileVersion ? "100%" : isLaptopVersion ? "44%" : "30%"}
               >
-                <Text fontWeight="semibold" color="blue.900">
+                <Text fontWeight="semibold" color="blue.900" mb={-1}>
                   Taxa de entrega
                 </Text>
                 <Flex gap={2} alignItems="flex-start">
@@ -305,7 +349,7 @@ const DashboardSettings: NextPage = () => {
                 {...register("hasAutomaticOpening")}
               />
               <Text>
-                Ativar abertura automática do restaurante
+                Abrir restaurante automaticamente
                 <Button
                   colorScheme="none"
                   borderRadius="full"
@@ -314,7 +358,7 @@ const DashboardSettings: NextPage = () => {
                   size="xs"
                   bg="green.300"
                   _hover={{ backgroundColor: "green.200" }}
-                  onClick={onOpen}
+                  onClick={onInfoModalOpen}
                 >
                   <MdInfoOutline size={20} color={theme.colors.blue[900]} />
                 </Button>
