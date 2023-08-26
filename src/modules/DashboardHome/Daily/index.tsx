@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/cognitive-complexity */
 /* eslint-disable react/jsx-no-bind */
 import { useState, useEffect } from "react";
 import {
@@ -46,24 +47,28 @@ const CARDS_DATA = [
     title: "Faturamento Total",
     value: "R$ 3.705,00",
     icon: <MdAttachMoney size={64} color={theme.colors.blue[900]} />,
+    laptopIcon: <MdAttachMoney size={48} color={theme.colors.blue[900]} />,
   },
   {
     id: 1,
     title: "Total de Pedidos",
     value: "373",
     icon: <MdStar size={64} color={theme.colors.blue[900]} />,
+    laptopIcon: <MdStar size={48} color={theme.colors.blue[900]} />,
   },
   {
     id: 2,
     title: "Pedidos - Delivery",
     value: "344",
     icon: <MdDeliveryDining size={64} color={theme.colors.blue[900]} />,
+    laptopIcon: <MdDeliveryDining size={48} color={theme.colors.blue[900]} />,
   },
   {
     id: 3,
     title: "Pedidos - Presencial",
     value: "129",
     icon: <MdHome size={64} color={theme.colors.blue[900]} />,
+    laptopIcon: <MdHome size={48} color={theme.colors.blue[900]} />,
   },
 ];
 
@@ -101,6 +106,12 @@ export default function DailyDashboardHome() {
   const isMobileVersion = useBreakpointValue({
     base: true,
     md: false,
+  });
+
+  const isTabletVersion = useBreakpointValue({
+    base: true,
+    md: true,
+    lg: false,
   });
 
   const isLaptopVersion = useBreakpointValue({
@@ -212,8 +223,11 @@ export default function DailyDashboardHome() {
       </Flex>
       <Flex
         flexDirection={isMobileVersion ? "column" : "row"}
-        py={8}
-        gap={8}
+        justifyContent="center"
+        py={isMobileVersion ? 6 : isTabletVersion ? 8 : isLaptopVersion ? 6 : 8}
+        gap={
+          isMobileVersion ? 4 : isTabletVersion ? 8 : isLaptopVersion ? 6 : 8
+        }
         flexWrap="wrap"
       >
         {CARDS_DATA.map((item) => {
@@ -223,18 +237,36 @@ export default function DailyDashboardHome() {
               bg="green.300"
               borderRadius={8}
               p={2}
-              pr={6}
-              minW={isMobileVersion ? "100%" : 340}
+              pr={isMobileVersion ? 4 : 6}
+              minW={
+                isMobileVersion
+                  ? "100%"
+                  : isTabletVersion
+                  ? 340
+                  : isLaptopVersion
+                  ? 248
+                  : 340
+              }
               gap={2}
               alignItems="center"
               boxShadow="md"
             >
-              {item.icon}
+              {isTabletVersion
+                ? item.icon
+                : isLaptopVersion
+                ? item.laptopIcon
+                : item.icon}
               <Stack>
                 <Text fontWeight="semibold" color="blue.900" mb={-3}>
                   {item.title}
                 </Text>
-                <Text fontSize="3xl" fontWeight="bold" color="blue.900">
+                <Text
+                  fontSize={
+                    isTabletVersion ? "3xl" : isLaptopVersion ? "xl" : "3xl"
+                  }
+                  fontWeight="bold"
+                  color="blue.900"
+                >
                   {item.value}
                 </Text>
               </Stack>

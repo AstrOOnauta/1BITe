@@ -104,8 +104,15 @@ const MyRestaurants: NextPage = () => {
             MY_RESTAURANTS_DATA.filter((item) => item.role === "owner").map(
               (item) => {
                 return (
-                  <Stack key={item.id}>
-                    <Link href={`/${item.id}/dashboard`}>
+                  <Stack
+                    key={item.id}
+                    opacity={item.status !== "active" ? 0.5 : 1}
+                  >
+                    <Link
+                      href={
+                        item.status !== "active" ? "" : `/${item.id}/dashboard`
+                      }
+                    >
                       <Flex
                         alignItems="center"
                         bg="green.50"
@@ -221,8 +228,15 @@ const MyRestaurants: NextPage = () => {
             MY_RESTAURANTS_DATA.filter((item) => item.role !== "owner").map(
               (item) => {
                 return (
-                  <Stack key={item.id}>
-                    <Link href={`/${item.id}/dashboard`}>
+                  <Stack
+                    key={item.id}
+                    opacity={item.status !== "active" ? 0.5 : 1}
+                  >
+                    <Link
+                      href={
+                        item.status !== "active" ? "" : `/${item.id}/dashboard`
+                      }
+                    >
                       <Flex
                         alignItems="center"
                         bg="green.50"
