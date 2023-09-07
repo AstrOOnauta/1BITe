@@ -131,6 +131,7 @@ export default function SideBar({ closeDrawer }: SideBarProps) {
         h={isTabletVersion ? 32 : isExpanded ? 16 : 12}
         mx={2}
         mb={isExpanded ? 20 : 24}
+        alt="Restaurant logo"
       />
       {ROUTE_BUTTONS_DATA.map((item) => {
         return (
@@ -177,6 +178,7 @@ export default function SideBar({ closeDrawer }: SideBarProps) {
           right={-5}
           top={10}
           onClick={closeDrawer}
+          aria-label="Button to close sidebar"
         >
           <MdClose size={24} />
         </Button>
@@ -192,6 +194,7 @@ export default function SideBar({ closeDrawer }: SideBarProps) {
           right={-5}
           bottom={10}
           onClick={handleSideBar}
+          aria-label="Toggle to expand/no expand sidebar"
         >
           {isExpanded ? (
             <MdKeyboardDoubleArrowLeft size={24} />
