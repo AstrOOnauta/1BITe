@@ -138,6 +138,7 @@ const SignUp: NextPage = () => {
                   colorScheme="none"
                   p={0}
                   onClick={() => setShow({ ...show, password: !show.password })}
+                  aria-label="Toggle to show/no show password"
                 >
                   {show.password ? (
                     <AiOutlineEye color={theme.colors.gray["900"]} size={20} />
@@ -179,6 +180,7 @@ const SignUp: NextPage = () => {
                   onClick={() =>
                     setShow({ ...show, confirmPassword: !show.confirmPassword })
                   }
+                  aria-label="Toggle to show/no show confirm password"
                 >
                   {show.confirmPassword ? (
                     <AiOutlineEye color={theme.colors.blue["900"]} size={20} />
