@@ -181,12 +181,16 @@ const MyRestaurants: NextPage = () => {
                   ).map((item) => {
                     return (
                       <Tr key={item.id}>
-                        <Td py={2}>
+                        <Th py={2} textTransform="none">
                           <Flex alignItems="center" gap={2}>
-                            <Avatar size="sm" src={item.imageUrl} />
-                            <Text>{item.name}</Text>
+                            <Avatar
+                              size="sm"
+                              src={item.imageUrl}
+                              name={`${item.name} image`}
+                            />
+                            <Text fontSize="md">{item.name}</Text>
                           </Flex>
-                        </Td>
+                        </Th>
                         <Td py={2}>
                           <Badge
                             bg={createBadgeBackground(item.status)}
@@ -309,12 +313,16 @@ const MyRestaurants: NextPage = () => {
                   ).map((item) => {
                     return (
                       <Tr key={item.id}>
-                        <Td py={2}>
+                        <Th py={2} textTransform="none">
                           <Flex alignItems="center" gap={2}>
-                            <Avatar size="sm" src={item.imageUrl} />
-                            <Text>{item.name}</Text>
+                            <Avatar
+                              size="sm"
+                              src={item.imageUrl}
+                              name={`${item.name} image`}
+                            />
+                            <Text fontSize="md">{item.name}</Text>
                           </Flex>
-                        </Td>
+                        </Th>
                         <Td py={2}>
                           <Text>{Roles[item.role]}</Text>
                         </Td>
