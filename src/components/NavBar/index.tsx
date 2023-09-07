@@ -186,6 +186,7 @@ export default function NavBar() {
           _active={{
             backgroundColor: "blue.900",
           }}
+          aria-label="Button to open navbar menu"
         />
         <MenuList bg="green.50" shadow="xl">
           {version === "mobile" ? (
@@ -216,8 +217,8 @@ export default function NavBar() {
       zIndex={2}
     >
       <Flex alignItems="center" gap={5}>
-        <Link href="/">
-          <Image src="icons/logo-1bite.svg" w={16} h={16} />
+        <Link href="/" aria-label="link to go home">
+          <Image src="icons/logo-1bite.svg" w={16} h={16} alt="1BITe logo" />
         </Link>
         {isMobileVersion ? null : (
           <>
