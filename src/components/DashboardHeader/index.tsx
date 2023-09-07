@@ -3,6 +3,7 @@ import {
   DrawerContent,
   DrawerOverlay,
   Flex,
+  FormLabel,
   Switch,
   Text,
   theme,
@@ -50,6 +51,7 @@ export default function DashboardHeader() {
               backgroundColor: "blue.900",
             }}
             onClick={onOpen}
+            aria-label="Button to open dashboard menu"
           >
             <BsReverseLayoutTextSidebarReverse
               size={20}
@@ -59,10 +61,16 @@ export default function DashboardHeader() {
         ) : null}
         <Flex alignItems="center" gap={isMobileVersion ? 4 : 16}>
           <Flex alignItems="center" gap={2}>
-            <Text color="blue.900" fontWeight="bold">
+            <FormLabel
+              htmlFor="switch-open-restaurant"
+              color="blue.900"
+              fontWeight="bold"
+              m={0}
+            >
               Abrir para pedidos
-            </Text>
+            </FormLabel>
             <Switch
+              id="switch-open-restaurant"
               sx={{
                 "span.chakra-switch__track": {
                   backgroundColor: "blue.900",
