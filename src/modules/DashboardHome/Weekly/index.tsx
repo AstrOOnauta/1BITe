@@ -145,7 +145,12 @@ export default function WeeklyDashboardHome() {
         gap={2}
       >
         <Flex gap={1} alignSelf="center">
-          <Button variant="solid" p={0} onClick={previousWeek}>
+          <Button
+            variant="solid"
+            p={0}
+            onClick={previousWeek}
+            aria-label="Button to previous week"
+          >
             <MdChevronLeft size={24} color="blue.900" />
           </Button>
           <DatePicker
@@ -158,7 +163,12 @@ export default function WeeklyDashboardHome() {
             todayButton="Escolher Hoje"
             customInput={<Input />}
           />
-          <Button variant="solid" p={0} onClick={nextWeek}>
+          <Button
+            variant="solid"
+            p={0}
+            onClick={nextWeek}
+            aria-label="Button to next week"
+          >
             <MdChevronRight size={24} color="blue.900" />
           </Button>
         </Flex>

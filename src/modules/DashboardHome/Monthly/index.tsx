@@ -152,7 +152,12 @@ export default function MonthlyDashboardHome() {
         gap={2}
       >
         <Flex gap={1} alignSelf="center">
-          <Button variant="solid" p={0} onClick={previousMonth}>
+          <Button
+            variant="solid"
+            p={0}
+            onClick={previousMonth}
+            aria-label="Button to previous month"
+          >
             <MdChevronLeft size={24} color="blue.900" />
           </Button>
           <DatePicker
@@ -164,7 +169,12 @@ export default function MonthlyDashboardHome() {
             customInput={<Input />}
             showMonthYearPicker
           />
-          <Button variant="solid" p={0} onClick={nextMonth}>
+          <Button
+            variant="solid"
+            p={0}
+            onClick={nextMonth}
+            aria-label="Button to next month"
+          >
             <MdChevronRight size={24} color="blue.900" />
           </Button>
         </Flex>

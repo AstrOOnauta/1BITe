@@ -146,7 +146,12 @@ export default function DailyDashboardHome() {
         gap={2}
       >
         <Flex gap={1} alignSelf="center">
-          <Button variant="solid" p={0} onClick={previousDay}>
+          <Button
+            variant="solid"
+            p={0}
+            onClick={previousDay}
+            aria-label="Button to preview day"
+          >
             <MdChevronLeft size={24} color="blue.900" />
           </Button>
           <DatePicker
@@ -157,7 +162,12 @@ export default function DailyDashboardHome() {
             todayButton="Escolher Hoje"
             customInput={<Input />}
           />
-          <Button variant="solid" p={0} onClick={nextDay}>
+          <Button
+            variant="solid"
+            p={0}
+            onClick={nextDay}
+            aria-label="Button to next day"
+          >
             <MdChevronRight size={24} color="blue.900" />
           </Button>
         </Flex>
