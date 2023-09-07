@@ -170,6 +170,7 @@ const Login: NextPage = () => {
                           colorScheme="none"
                           p={0}
                           onClick={() => setShowPassword(!showPassword)}
+                          aria-label="Toggle to show/no show password"
                         >
                           {showPassword ? (
                             <AiOutlineEye
@@ -226,6 +227,7 @@ const Login: NextPage = () => {
                 size="md"
                 _hover={{ opacity: 0.8 }}
                 _active={{ opacity: 0.4 }}
+                aria-label="Google login button"
               >
                 <FcGoogle size={48} />
               </Button>
@@ -234,6 +236,7 @@ const Login: NextPage = () => {
                 size="md"
                 _hover={{ opacity: 0.8 }}
                 _active={{ opacity: 0.4 }}
+                aria-label="facebook login button"
               >
                 <AiFillFacebook color="#3b5998" size={48} />
               </Button>
@@ -242,6 +245,7 @@ const Login: NextPage = () => {
                 size="md"
                 _hover={{ opacity: 0.8 }}
                 _active={{ opacity: 0.4 }}
+                aria-label="Apple login button"
               >
                 <AiFillApple color="#000000" size={48} />
               </Button>
